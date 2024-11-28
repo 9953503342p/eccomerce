@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Category</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100">
+<%- include('header')%>
+<%- include('slidderbar') %>
+    <div class="p-6 max-w-md mx-auto bg-white rounded shadow">
+        <h2 class="text-2xl font-bold mb-4">Add a New Category</h2>
+        <form action="/category" method="POST" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2" for="name">Category Name</label>
+                <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    class="border rounded w-full p-2"
+                    required
+                />
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2" for="description">Description</label>
+                <textarea
+                    name="description"
+                    id="description"
+                    class="border rounded w-full p-2"
+                    required
+                ></textarea>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2" for="image">Image</label>
+                <input
+                    type="file"
+                    name="Image"
+                    id="image"
+                    class="border rounded w-full p-2"
+                />
+            </div>
+            <button type="submit" class="bg-blue-500 text-white rounded p-2 w-full">
+                Submit
+            </button>
+        </form>
+    </div>
+
+    <!-- Displaying Existing Categories -->
+    <div class="p-6 max-w-4xl mx-auto mt-8 bg-white rounded shadow">
+        <h2 class="text-2xl font-bold mb-4">Existing Categories</h2>
+        <table class="min-w-full bg-white border border-gray-300">
+            <thead>
+                <tr>
+                    <th class="border-b-2 border-gray-300 px-4 py-2">Category Name</th>
+                    <th class="border-b-2 border-gray-300 px-4 py-2">Description</th>
+                    <th class="border-b-2 border-gray-300 px-4 py-2">Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (data && data.length > 0) { %>
+                    <% data.forEach(category => { %>
+                        <tr class="border-2 border-black">
+                            <td class="border-2 border-gray-300 px-4 py-2"><%= category.name %></td>
+                            <td class="border-2 border-gray-300 px-4 py-2"><%= category.description %></td>
+                            <td class="border-2 border-gray-300 px-4 py-2">
+                                <% if (category.Image) { %>
+                                    <img src="<%= category.Image %>" alt="<%= category.name %>" class="w-16 h-16 object-cover" />
+                                <% } else { %>
+                                    No image
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="3" class="border-b text-center px-4 py-2">No categories available.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+   
+    </div>
+    <%- include('footer') %>
+</body>
+</html>

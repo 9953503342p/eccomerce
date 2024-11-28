@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS-Only Sidebar</title>
+  <style>
+    /* Hide the checkbox input */
+    #toggleSidebar {
+      display: none;
+    }
+
+    /* Sidebar styling */
+    .sidebar {
+      height: 90%;
+      width: 250px;
+    position:absolute;
+      top: 60px;
+      left: -0px;
+      background-color: #111;
+      overflow-x: hidden;
+    
+      padding-top: 60px;
+      transition: 0.3s;
+    }
+
+    .sidebar a {
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 18px;
+      
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      color: #f1f1f1;
+    }
+
+    /* Main content */
+    .main-content {
+      padding: 16px;
+      margin-left: 0;
+      transition: 0.3s;
+    }
+
+    /* Label styling for the toggle button */
+    .openbtn {
+      font-size: 20px;
+      cursor: pointer;
+      background-color: #111;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+    }
+
+    /* Toggle sidebar and shift content when checkbox is checked */
+    #toggleSidebar:checked ~ .sidebar {
+      left: 0;
+    }
+
+    #toggleSidebar:checked ~ .main-content {
+      margin-left: 250px;
+    }
+    a{
+        background-color: rgb(162, 160, 160);
+        box-shadow: #818181;
+        box-shadow: 5px;
+        color: blue;
+        margin-bottom: 10px;
+        border: white;
+        border: 2px solid white;
+        border-radius: 12px;
+
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <a href="/add-category">add-category</a>
+    <a href="/sub-category">Sub cateegory</a>
+    <a href="/Brand">Brand</a>
+    <a href="/Product">Product</a>
+  </div>
+
+  <!-- Main content area -->
+  
+
+</body>
+</html>

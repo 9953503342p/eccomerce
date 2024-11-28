@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Subcategory</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100 flex">
+    <%- include('Header') %>
+    <%- include('slidderbar') %>
+
+    <div class="flex-1 p-6">
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6 mt-10">
+            <h2 class="text-2xl font-bold mb-4">Add a New Subcategory</h2>
+            <form action="/subcategory" method="POST" enctype="multipart/form-data">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2" for="category">Category</label>
+                    <select name="categoryname" id="category" class="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        <option value="">Select a category</option>
+                        <% categories.forEach(category => { %>
+                            <option value="<%= category.name %>"><%= category.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2" for="name">Subcategory</label>
+                    <input type="text" name="subcategoryname" id="name" class="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2" for="description">Description</label>
+                    <textarea name="subcategorydescription" id="description" class="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2" for="subcategoryImage">Image</label>
+                    <input type="file" name="subcategoryImage" id="image" class="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+
+                <button type="submit" class="bg-blue-500 text-white rounded p-2 w-full hover:bg-blue-600 transition duration-200">Submit</button>
+            </form>
+        </div>
+
+        <!-- Displaying Existing Subcategories -->
+        <div class="mt-8 bg-white rounded-lg shadow-lg p-6 max-w-7xl mx-auto"> <!-- Changed to max-w-2xl -->
+            <h2 class="text-2xl font-bold mb-4">Existing Subcategories</h2>
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="border-b-2 border-gray-300 px-2 py-1 text-left">Subcategory Name</th>
+                        <th class="border-b-2 border-gray-300 px-2 py-1 text-left">Description</th>
+                        <th class="border-b-2 border-gray-300 px-2 py-1 text-left">Category</th>
+                        <th class="border-b-2 border-gray-300 px-2 py-1 text-left">Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% subcategories.forEach(subcategory => { %>
+                        <tr>
+                            <td class="border px-2 py-1"><%= subcategory.subcategoryname %></td>
+                            <td class="border px-2 py-1"><%= subcategory.subcategorydescription %></td>
+                            <td class="border px-2 py-1"><%= subcategory.categoryname %></td>
+                            <td class="border px-2 py-1">
+                                <% if (subcategory.subcategoryimage) { %>
+                                    <img src="/<%= subcategory.subcategoryimage %>" alt="<%= subcategory.subcategoryname %> Image" class="h-16 w-16 object-cover rounded" />
+                                <% } else { %>
+                                    No Image
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
